@@ -113,12 +113,12 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+    <a href="/" rel="section">Home</a>
 
   </li>
         <li class="menu-item menu-item-reviews">
 
-    <a href="/reviews/" rel="section"><i class="fa fa-user fa-fw"></i>reviews</a>
+    <a href="/reviews/" rel="section">reviews</a>
 
   </li>
   </ul>
@@ -171,7 +171,7 @@
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2023/03/09/hello-world/" itemprop="url">
+          <a class="post-title-link" href="/2023/03/09/index/" itemprop="url">
             <span itemprop="name">Untitled</span>
           </a>
       </div>
@@ -234,8 +234,6 @@
   </span>
   <span class="author" itemprop="copyrightHolder">ZHAO Liyu</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
-  </div>
 
         
 
@@ -280,6 +278,26 @@
 
 
 
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
 
 
 
